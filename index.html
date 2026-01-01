@@ -1,20 +1,410 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>我的第一个网页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPS-CLIP: Multi-Prompt Synergistic CLIP for Remote Sensing Segmentation</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External CSS -->
+    <!-- 将 static/css/style.css 替换为你自己的样式路径 -->
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- 内部样式：用于 Tab 切换和特定的表格样式（直接沿用即可） -->
+    <style>
+        .tabs-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #f1f3f4;
+            border: 1px solid #dadce0;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-family: 'Google Sans', sans-serif;
+            font-size: 0.95rem;
+            color: #5f6368;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .tab-btn:hover {
+            background-color: #e8eaed;
+            color: #202124;
+        }
+
+        .tab-btn.active {
+            background-color: #363636;
+            color: #fff;
+            border-color: #363636;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-table th, .results-table td {
+            font-size: 0.85rem;
+            padding: 10px 6px;
+        }
+        
+        .results-table th {
+            white-space: nowrap;
+        }
+
+        .highlight-row {
+            background-color: #f0f8ff;
+            font-weight: bold;
+        }
+
+        .results-table td {
+            text-align: center;
+        }
+        .results-table td:first-child, .results-table th:first-child {
+            text-align: left;
+        }
+
+        .tab-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-    <h1>你好，世界！</h1>
-    <p>这是我写的第一个 HTML 页面。</p>
 
-    <h2>一个简单的列表：</h2>
-    <ul>
-        <li>学习 HTML</li>
-        <li>学习 CSS</li>
-        <li>学习 JavaScript</li>
-    </ul>
+<!-- 阅读进度条 -->
+<div id="progress-container">
+    <div id="progress-bar"></div>
+</div>
 
-    <a href="https://www.baidu.com" target="_blank">点我去百度</a>
+<!-- 右侧悬浮导航 -->
+<div class="floating-nav">
+    <a href="#home" title="Home"><i class="fas fa-home"></i></a>
+    <a href="#abstract" title="Abstract"><i class="fas fa-align-left"></i></a>
+    <a href="#methodology" title="Methodology"><i class="fas fa-cogs"></i></a>
+    <a href="#quantitative-results" title="Results"><i class="fas fa-images"></i></a>
+    <a href="#citation" title="Citation"><i class="fas fa-quote-right"></i></a>
+</div>
+
+<div class="container" id="home">
+
+    <!-- Hero Section -->
+    <div class="section" style="padding-bottom: 20px;">
+        <div style="text-align: center;">
+            <h1 class="title title-black">
+                MPS-CLIP: Multi-Prompt Synergistic CLIP<br>for Remote Sensing Segmentation
+            </h1>
+            
+            <!-- 作者部分（替换为你的作者与单位） -->
+            <div class="author-block">
+                <span class="author-name"><a href="#" target="_blank">Author 1</a><sup>1,*</sup></span>
+                <span class="author-name"><a href="#" target="_blank">Author 2</a><sup>1,*</sup></span>
+                <span class="author-name"><a href="#" target="_blank">Author 3</a><sup>2</sup></span>
+                <span class="author-name"><a href="#" target="_blank">Author 4</a><sup>2</sup></span>
+                <span class="author-name"><a href="#" target="_blank">Author 5</a><sup>3,†</sup></span>
+                <br>
+                <span class="author-name"><a href="#" target="_blank">Author 6</a><sup>3</sup></span>
+                <span class="author-name"><a href="#" target="_blank">Author 7</a><sup>1</sup></span>
+            </div>
+        
+            <!-- 机构部分（替换为你的真实机构） -->
+            <div class="affiliations">
+                <span class="affil-item"><sup>1</sup>Institution A</span>
+                <span class="affil-item"><sup>2</sup>Institution B</span>
+                <span class="affil-item"><sup>3</sup>Institution C</span>
+            </div>
+
+            <!-- Links：替换为你的链接 -->
+            <div class="link-buttons" style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
+                <a href="https://arxiv.org/pdf/xxxx.xxxxx" target="_blank" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
+                <a href="https://github.com/yourname/MPS-CLIP" target="_blank" class="btn"><i class="fab fa-github"></i> Code</a>
+                <a href="https://huggingface.co/datasets/yourname/mps-clip-datasets" target="_blank" class="btn"><i class="fas fa-database"></i> Data</a>
+                <a href="https://huggingface.co/yourname/mps-clip-models" target="_blank" class="btn"><i class="fas fa-layer-group"></i> Checkpoints</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图 1: Overall Results / Radar 图（可选，如果你有） -->
+    <div class="section">
+        <h3 class="figure-header" style="text-align: center;">Overall Results Comparison</h3>
+        <div class="img-container" style="height: 550px; width: 100%; overflow: hidden;">
+            <!-- 替换为你的雷达图 HTML 或图片 -->
+            <iframe src="radar/mps_clip_radar_chart.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <!-- Abstract -->
+    <div class="section" id="abstract">
+        <h2 style="text-align: center; margin-bottom: 20px;">Abstract</h2>
+        <p class="text-content">
+            <!-- 用你的摘要替换这一段 -->
+            In this work, we propose <b>MPS-CLIP</b>, a multi-prompt synergistic CLIP framework tailored for remote sensing image semantic segmentation. 
+            By designing a set of complementary visual–textual prompts and integrating them into CLIP’s vision–language alignment mechanism, 
+            MPS-CLIP exploits both category-aware priors and spatial structures in high-resolution remote sensing scenes. 
+            Specifically, we introduce a multi-level prompt composition strategy to model global scene semantics, 
+            local object details, and domain-specific appearance variations. A prompt interaction module is further developed to 
+            adaptively fuse information from different prompts, enhancing robustness under label scarcity and cross-domain shifts. 
+            Extensive experiments on multiple benchmark datasets demonstrate that MPS-CLIP achieves state-of-the-art performance 
+            in both fully-supervised and semi-supervised settings, validating the effectiveness of multi-prompt synergy for 
+            remote sensing segmentation.
+        </p>
+    </div>
+
+    <!-- Methodology / Framework -->
+    <div class="section" id="methodology">
+        <h2 style="text-align: center; margin-bottom: 30px;">Methodology</h2>
+
+        <!-- 框架图（替换图片路径） -->
+        <div class="img-container zoom-trigger">
+            <img src="static/image/MPS_CLIP_framework.png" alt="MPS-CLIP Framework Overview" style="width: 100%; border-radius: 8px;">
+            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
+                Overview of the proposed MPS-CLIP framework. Multiple visual–textual prompts are jointly optimized on top of a CLIP backbone to capture global semantics, local structures, and domain-specific priors for remote sensing segmentation.
+            </p>
+        </div>
+
+        <div class="text-content" style="margin-top: 30px;">
+            <h3 class="figure-header" style="text-align: center;">Prompt Attention Visualization</h3>
+        </div>
+        
+        <!-- Attention 可视化图（替换图片路径） -->
+        <div class="img-container zoom-trigger" style="width: 100%; margin: 20px auto;">
+             <img src="static/image/MPS_CLIP_attention.png" alt="Prompt Attention Visualization" style="width: 100%; border-radius: 8px;">
+             <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
+                Visualization of attention maps from different prompts and CLIP heads, showing how MPS-CLIP captures complementary semantic and structural cues.
+             </p>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Experimental Results（示例：可以按需删减/修改） -->
+    <!-- ============================================== -->
+    <div class="section" id="quantitative-results">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Experimental Results</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #666;">
+                Comparison with state-of-the-art methods across multiple remote sensing benchmarks.<br>
+                <span style="font-size: 0.9rem;">(<b>Bold</b>: Best, <u>Underline</u>: Second Best)</span>
+            </p>
+
+            <!-- 主 Tab：数据集名称（你可以替换为你实际用到的数据集） -->
+            <div class="tabs-header-wrapper">
+                <div class="tab-buttons main-tabs">
+                    <button class="tab-btn active" onclick="openDataset(event, 'ds1')">Dataset-1</button>
+                    <button class="tab-btn" onclick="openDataset(event, 'ds2')">Dataset-2</button>
+                    <button class="tab-btn" onclick="openDataset(event, 'ds3')">Dataset-3</button>
+                </div>
+            </div>
+
+            <!-- Dataset-1 示例表格 -->
+            <div id="ds1" class="dataset-content active">
+                <div class="tab-caption">Table I: Segmentation results (mIoU %) on Dataset-1.</div>
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>1/32</th>
+                                <th>1/16</th>
+                                <th>1/8</th>
+                                <th>1/4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>OnlySup</td><td>60.1</td><td>63.4</td><td>66.8</td><td>70.2</td></tr>
+                            <tr><td>Baseline-CLIP</td><td>62.5</td><td>65.1</td><td>68.0</td><td>71.0</td></tr>
+                            <tr><td>Method-A</td><td>63.2</td><td>66.0</td><td>69.1</td><td>71.5</td></tr>
+                            <tr><td>Method-B</td><td><u>64.0</u></td><td><u>67.0</u></td><td><u>70.5</u></td><td><u>72.3</u></td></tr>
+                            <tr class="highlight-row">
+                                <td>MPS-CLIP (Ours)</td>
+                                <td><b>65.7</b></td>
+                                <td><b>68.5</b></td>
+                                <td><b>71.8</b></td>
+                                <td><b>73.6</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Dataset-2 示例表格 -->
+            <div id="ds2" class="dataset-content">
+                <div class="tab-caption">Table II: Segmentation results (mIoU %) on Dataset-2.</div>
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th><th>mIoU</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>OnlySup</td><td>55.3</td></tr>
+                            <tr><td>Baseline-CLIP</td><td>57.9</td></tr>
+                            <tr><td>Method-A</td><td>59.0</td></tr>
+                            <tr><td>Method-B</td><td><u>60.4</u></td></tr>
+                            <tr class="highlight-row"><td>MPS-CLIP (Ours)</td><td><b>62.1</b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Dataset-3 示例表格 -->
+            <div id="ds3" class="dataset-content">
+                <div class="tab-caption">Table III: Segmentation results (mIoU %) on Dataset-3.</div>
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr><th>Method</th><th>mIoU</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>OnlySup</td><td>48.7</td></tr>
+                            <tr><td>Baseline-CLIP</td><td>51.2</td></tr>
+                            <tr><td>Method-A</td><td>52.8</td></tr>
+                            <tr><td>Method-B</td><td><u>54.3</u></td></tr>
+                            <tr class="highlight-row"><td>MPS-CLIP (Ours)</td><td><b>56.5</b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 轮播可视化区域（示例：替换图片路径） -->
+    <div class="section carousel-section" id="results">
+        <h2 style="text-align: center; margin-bottom: 10px;">Visual Comparisons & Qualitative Results</h2>
+        <p style="text-align: center; color: #5f6368; margin-bottom: 30px;">Swipe to view results across different datasets</p>
+        
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                
+                <div class="carousel-slide">
+                    <div class="zoom-trigger">
+                        <img src="static/image/mps_clip_vis_ds1.png" alt="Visual Comparison Dataset-1">
+                    </div>
+                    <div class="carousel-caption">Visual Comparison on Dataset-1</div>
+                </div>
+
+                <div class="carousel-slide">
+                    <div class="zoom-trigger">
+                        <img src="static/image/mps_clip_vis_ds2.png" alt="Visual Comparison Dataset-2">
+                    </div>
+                    <div class="carousel-caption">Visual Comparison on Dataset-2</div>
+                </div>
+
+                <div class="carousel-slide">
+                    <div class="zoom-trigger">
+                        <img src="static/image/mps_clip_vis_ds3.png" alt="Visual Comparison Dataset-3">
+                    </div>
+                    <div class="carousel-caption">Visual Comparison on Dataset-3</div>
+                </div>
+
+            </div>
+
+            <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+
+            <div class="carousel-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BibTeX -->
+    <div class="section" id="citation">
+        <h2 style="text-align: center; margin-bottom: 20px;">Citation</h2>
+        <div style="position: relative; max-width: 800px; margin: 0 auto;">
+            <bibtex>
+@article{MPS_CLIP,
+  title={MPS-CLIP: Multi-Prompt Synergistic CLIP for Remote Sensing Segmentation},
+  author={Author, First and Author, Second and Author, Third and Author, Fourth},
+  journal={XXXX},
+  year={2025},
+}
+            </bibtex>
+            <button class="copy-btn">Copy</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <div class="footer-title">Acknowledgment</div>
+                <p style="font-size: 0.9rem; margin-bottom: 0;">
+                    <!-- 替换为你的致谢内容 -->
+                    This work was supported by XXXX grants and projects.
+                </p>
+            </div>
+            <div class="footer-col" style="text-align: right;">
+                <div class="footer-title">About</div>
+                <p style="font-size: 0.9rem; margin-bottom: 10px;">
+                    © 2025 MPS-CLIP Project.
+                </p>
+                <p style="font-size: 0.85rem; color: #9aa0a6;">
+                    Website template adapted from <a href="https://github.com/nerfies/nerfies.github.io" class="footer-link">Nerfies</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- External JavaScript：替换为你自己的 JS 路径 -->
+<script src="static/js/script.js"></script>
+
+<!-- 内部 JS：数据集 Tab 切换（与原 Co2S 页面风格一致） -->
+<script>
+    function openDataset(evt, datasetId) {
+        var contents = document.getElementsByClassName("dataset-content");
+        for (var i = 0; i < contents.length; i++) {
+            contents[i].classList.remove("active");
+            contents[i].style.display = "none";
+        }
+
+        var buttons = document.querySelectorAll(".main-tabs .tab-btn");
+        buttons.forEach(function(btn) { btn.classList.remove("active"); });
+
+        document.getElementById(datasetId).style.display = "block";
+        setTimeout(function() {
+            document.getElementById(datasetId).classList.add("active");
+        }, 10);
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
 </body>
 </html>
