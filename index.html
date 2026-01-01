@@ -100,6 +100,18 @@
             margin-bottom: 15px;
             font-style: italic;
         }
+
+        /* 让主要图片不那么大且居中 */
+        .img-container.narrow {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .img-container.narrow img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -157,13 +169,7 @@
         </div>
     </div>
 
-    <!-- 图 1: Overall Results（这里用 results.png） -->
-    <div class="section">
-        <h3 class="figure-header" style="text-align: center;">Overall Results Comparison</h3>
-        <div class="img-container" style="width: 100%; overflow: hidden;">
-            <img src="results.png" alt="Overall Results Comparison" style="width: 100%; border-radius: 8px;">
-        </div>
-    </div>
+    <!-- 原来的 Overall Results 部分去掉，实验结果统一放在下面的 Experimental Results 中 -->
 
     <!-- Abstract -->
     <div class="section" id="abstract">
@@ -184,140 +190,60 @@
     <div class="section" id="methodology">
         <h2 style="text-align: center; margin-bottom: 30px;">Methodology</h2>
 
-        <!-- 框架图：使用 adapter.png -->
-        <div class="img-container zoom-trigger">
-            <img src="adapter.png" alt="Framework Overview" style="width: 100%; border-radius: 8px;">
+        <!-- 框架图 1：pipeline.png -->
+        <div class="img-container zoom-trigger narrow">
+            <img src="pipeline.png" alt="Pipeline Overview" style="border-radius: 8px;">
             <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Overview of the proposed Multi-Perspective Subimage CLIP with keyword guidance. 
-                The adapter module integrates multi-perspective subimages and textual keywords into a unified image-text retrieval framework.
+                Overall pipeline of the proposed Multi-Perspective Subimage CLIP with keyword guidance for remote sensing image-text retrieval.
+            </p>
+        </div>
+
+        <!-- 框架图 2：adapter.png -->
+        <div class="img-container zoom-trigger narrow" style="margin-top: 30px;">
+            <img src="adapter.png" alt="Adapter Module Overview" style="border-radius: 8px;">
+            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
+                Illustration of the adapter module that integrates multi-perspective subimages and textual keywords into CLIP for efficient retrieval.
             </p>
         </div>
 
         <!-- 可视化：Image / Text 特征 -->
-        <div class="text-content" style="margin-top: 30px;">
+        <div class="text-content" style="margin-top: 40px;">
             <h3 class="figure-header" style="text-align: center;">Visualization of Image and Text Features</h3>
         </div>
         
-        <div class="img-container zoom-trigger" style="width: 100%; margin: 20px auto;">
-            <img src="Image.png" alt="Image Feature Visualization" style="width: 100%; border-radius: 8px;">
+        <!-- text.png 可视化 -->
+        <div class="img-container zoom-trigger narrow" style="margin: 20px auto;">
+            <img src="text.png" alt="Text Feature Visualization" style="border-radius: 8px;">
+            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
+                Visualization of text features and keyword guidance for remote sensing image-text retrieval.
+            </p>
+        </div>
+
+        <!-- image.png 可视化 -->
+        <div class="img-container zoom-trigger narrow" style="margin: 20px auto;">
+            <img src="image.png" alt="Image Feature Visualization" style="border-radius: 8px;">
             <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
                 Visualization of image features obtained from multi-perspective subimages in remote sensing scenes.
             </p>
         </div>
-
-        <div class="img-container zoom-trigger" style="width: 100%; margin: 20px auto;">
-            <img src="Text.png" alt="Text Feature Visualization" style="width: 100%; border-radius: 8px;">
-            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Visualization of text features and keyword guidance used for remote sensing image-text retrieval.
-            </p>
-        </div>
     </div>
 
-    <!-- Experimental Results（表格部分暂时沿用原示例，可按需要修改） -->
+    <!-- Experimental Results：只放 results.png -->
     <div class="section" id="quantitative-results">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 20px;">Experimental Results</h2>
-            <p style="text-align: center; margin-bottom: 30px; color: #666;">
-                Comparison with state-of-the-art methods across multiple remote sensing benchmarks.<br>
-                <span style="font-size: 0.9rem;">(<b>Bold</b>: Best, <u>Underline</u>: Second Best)</span>
-            </p>
-
-            <div class="tabs-header-wrapper">
-                <div class="tab-buttons main-tabs">
-                    <button class="tab-btn active" onclick="openDataset(event, 'ds1')">Dataset-1</button>
-                    <button class="tab-btn" onclick="openDataset(event, 'ds2')">Dataset-2</button>
-                    <button class="tab-btn" onclick="openDataset(event, 'ds3')">Dataset-3</button>
-                </div>
-            </div>
-
-            <!-- Dataset-1 示例表格 -->
-            <div id="ds1" class="dataset-content active">
-                <div class="tab-caption">Table I: Retrieval results (mAP / Recall) on Dataset-1.</div>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>Method</th>
-                                <th>1/32</th>
-                                <th>1/16</th>
-                                <th>1/8</th>
-                                <th>1/4</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>OnlySup</td><td>60.1</td><td>63.4</td><td>66.8</td><td>70.2</td></tr>
-                            <tr><td>Baseline-CLIP</td><td>62.5</td><td>65.1</td><td>68.0</td><td>71.0</td></tr>
-                            <tr><td>Method-A</td><td>63.2</td><td>66.0</td><td>69.1</td><td>71.5</td></tr>
-                            <tr><td>Method-B</td><td><u>64.0</u></td><td><u>67.0</u></td><td><u>70.5</u></td><td><u>72.3</u></td></tr>
-                            <tr class="highlight-row">
-                                <td>Ours</td>
-                                <td><b>65.7</b></td>
-                                <td><b>68.5</b></td>
-                                <td><b>71.8</b></td>
-                                <td><b>73.6</b></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Dataset-2 示例表格 -->
-            <div id="ds2" class="dataset-content">
-                <div class="tab-caption">Table II: Retrieval results on Dataset-2.</div>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>Method</th><th>Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>OnlySup</td><td>55.3</td></tr>
-                            <tr><td>Baseline-CLIP</td><td>57.9</td></tr>
-                            <tr><td>Method-A</td><td>59.0</td></tr>
-                            <tr><td>Method-B</td><td><u>60.4</u></td></tr>
-                            <tr class="highlight-row"><td>Ours</td><td><b>62.1</b></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Dataset-3 示例表格 -->
-            <div id="ds3" class="dataset-content">
-                <div class="tab-caption">Table III: Retrieval results on Dataset-3.</div>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr><th>Method</th><th>Score</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>OnlySup</td><td>48.7</td></tr>
-                            <tr><td>Baseline-CLIP</td><td>51.2</td></tr>
-                            <tr><td>Method-A</td><td>52.8</td></tr>
-                            <tr><td>Method-B</td><td><u>54.3</u></td></tr>
-                            <tr class="highlight-row"><td>Ours</td><td><b>56.5</b></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Qualitative Results：用 results.png 再展示一次（也可以删掉这块，如果觉得重复） -->
-    <div class="section carousel-section" id="results">
-        <h2 style="text-align: center; margin-bottom: 10px;">Qualitative Results</h2>
-        <p style="text-align: center; color: #5f6368; margin-bottom: 30px;">
-            Visual comparisons of retrieval results with Multi-Perspective Subimage CLIP.
+        <h2 style="text-align: center; margin-bottom: 20px;">Experimental Results</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #666;">
+            Quantitative and qualitative comparisons with state-of-the-art methods on remote sensing image-text retrieval benchmarks.
         </p>
-        
-        <div class="img-container zoom-trigger" style="width: 100%; margin: 0 auto;">
-            <img src="results.png" alt="Qualitative Retrieval Results" style="width: 100%; border-radius: 8px;">
+
+        <div class="img-container zoom-trigger narrow">
+            <img src="results.png" alt="Experimental Results" style="border-radius: 8px;">
             <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Example retrieval results on remote sensing image-text datasets.
+                Experimental results of the proposed method compared with existing approaches on multiple datasets.
             </p>
         </div>
     </div>
+
+    <!-- 下面的 Qualitative Results / 表格等都去掉，只保留上面 results.png 即为实验结果 -->
 
     <!-- BibTeX -->
     <div class="section" id="citation">
@@ -360,7 +286,7 @@
 <!-- External JavaScript -->
 <script src="static/js/script.js"></script>
 
-<!-- 内部 JS：数据集 Tab 切换 -->
+<!-- 内部 JS：数据集 Tab 切换（目前已经不用表格 Tab，如果未来要加表格可沿用） -->
 <script>
     function openDataset(evt, datasetId) {
         var contents = document.getElementsByClassName("dataset-content");
