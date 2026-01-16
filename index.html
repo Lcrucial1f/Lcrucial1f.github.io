@@ -3,59 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Perspective Subimage CLIP with Keyword Guidance for Remote Sensing Image-Text Retrieval</title>
+    <title>MPS-CLIP | Remote Sensing Image-Text Retrieval</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- External CSS -->
-    <link rel="stylesheet" href="static/css/style.css">
 
-    <!-- 内部样式：用于 Tab 切换和特定的表格样式 -->
     <style>
-        .tabs-container {
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
+        :root {
+            --primary-color: #2563eb;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --bg-body: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border-color: #e5e7eb;
+            --max-width: 1080px;
         }
 
+        /* --- Global Reset & Type --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        h1, h2, h3, h4, th, .btn, footer {
+            font-family: 'Inter', sans-serif;
+        }
+
+        a { color: var(--primary-color); text-decoration: none; transition: 0.2s; }
+        a:hover { color: #1e40af; text-decoration: underline; }
+
+        /* --- Progress Bar --- */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 9999;
+        }
+        #progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 70px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding-top: 80px;
+            padding-bottom: 40px;
+            background: linear-gradient(to bottom, #fff, #fcfcfc);
+        }
+
+        .title {
+            font-size: 2.2rem; 
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            max-width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media(max-width: 768px) {
+            .title { 
+                font-size: 1.5rem; 
+                max-width: 100%;
+            } 
+        }
+
+        .authors {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .author-name { margin: 0 10px; color: var(--primary-color); font-weight: 600; }
+        .affiliations { font-size: 1rem; color: var(--text-muted); margin-bottom: 30px; }
+
+        .btn-group {
+            display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap;
+        }
+        .btn {
+            background: #111; color: #fff; padding: 10px 24px; border-radius: 50px;
+            font-weight: 500; font-size: 0.95rem; transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn:hover { background: #333; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-decoration: none; color: white;}
+
+        /* --- Abstract --- */
+        .abstract-box {
+            background: var(--bg-alt);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+        .abstract-text { text-align: justify; margin-bottom: 15px; }
+
+        /* --- Figures --- */
+        figure { margin: 40px 0; text-align: center; }
+        .img-wrapper {
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: inline-block;
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        .img-wrapper:hover { transform: scale(1.005); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
+        figcaption { margin-top: 12px; font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+
+        /* --- Tables (Academic Style) --- */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0 40px 0;
+            border-radius: 8px;
+        }
+        
+        .academic-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem; 
+            margin: 0 auto;
+            white-space: nowrap; 
+        }
+        
+        .academic-table th, .academic-table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+        
+        .academic-table th { font-weight: 600; color: #111; background-color: #fafafa; }
+        
+        .academic-table thead tr:first-child th { border-top: 2px solid #000; }
+        .academic-table thead tr:last-child th { border-bottom: 1px solid #000; }
+        .academic-table tbody tr:last-child td { border-bottom: 2px solid #000; }
+        .academic-table td { border-bottom: 1px solid #eee; }
+        
+        .row-highlight { background-color: #f0f8ff; font-weight: bold; }
+        .best { font-weight: bold; color: #000; }
+        .second { text-decoration: underline; color: #444; }
+
+        /* Table Section Header */
+        .table-section-header {
+            text-align: center !important;
+            font-weight: 600;
+            color: #444;
+            background-color: #f8f9fa;
+            font-style: normal;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Tabs System --- */
         .tab-buttons {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
 
         .tab-btn {
-            background-color: #f1f3f4;
-            border: 1px solid #dadce0;
-            border-radius: 20px;
-            padding: 8px 20px;
-            font-family: 'Google Sans', sans-serif;
-            font-size: 0.95rem;
-            color: #5f6368;
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #4b5563;
             cursor: pointer;
             transition: all 0.2s ease;
             outline: none;
+            font-size: 0.95rem;
         }
 
         .tab-btn:hover {
-            background-color: #e8eaed;
-            color: #202124;
+            background-color: #e5e7eb;
+            color: #111;
         }
 
         .tab-btn.active {
-            background-color: #363636;
+            background-color: var(--primary-color);
             color: #fff;
-            border-color: #363636;
-            font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
         }
 
         .tab-content {
@@ -67,244 +226,599 @@
             display: block;
         }
 
+        /* --- Carousel (Visual Results) --- */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding-bottom: 10px;
+        }
+
+        .carousel-slide {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.05);
+            color: #333;
+            border: none;
+            padding: 15px 12px;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.2s;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+        .carousel-btn:hover { background: rgba(0,0,0,0.1); color: var(--primary-color); }
+        .carousel-btn.prev { left: 0; }
+        .carousel-btn.next { right: 0; }
+
+        .carousel-caption {
+            margin-top: 15px;
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* --- Ablation Layout --- */
+        .ablation-content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .ablation-desc {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .results-table th, .results-table td {
-            font-size: 0.85rem;
-            padding: 10px 6px;
+        /* --- BibTeX (Light Theme) --- */
+        .bibtex-container {
+            background: #f9fafb; /* Light gray background */
+            color: #1f2937; /* Dark text */
+            padding: 25px; 
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            font-family: 'Roboto Mono', monospace; 
+            font-size: 0.85rem; 
+            position: relative;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
         
-        .results-table th {
-            white-space: nowrap;
+        .copy-btn {
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: #e5e7eb;
+            color: #374151; 
+            border: 1px solid #d1d5db;
+            padding: 4px 12px; 
+            border-radius: 4px; 
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #d1d5db;
+            color: #111;
         }
 
-        .highlight-row {
-            background-color: #f0f8ff;
-            font-weight: bold;
+        /* Lightbox */
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98); z-index: 10000;
+            align-items: center; justify-content: center; cursor: zoom-out;
         }
-
-        .results-table td {
-            text-align: center;
-        }
-        .results-table td:first-child, .results-table th:first-child {
-            text-align: left;
-        }
-
-        .tab-caption {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        /* 让主要图片不那么大且居中 */
-        .img-container.narrow {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .img-container.narrow img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .lightbox img { max-width: 95%; max-height: 95%; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-<!-- 阅读进度条 -->
-<div id="progress-container">
-    <div id="progress-bar"></div>
-</div>
+    <!-- Progress Bar -->
+    <div id="progress-container"><div id="progress-bar"></div></div>
 
-<!-- 右侧悬浮导航 -->
-<div class="floating-nav">
-    <a href="#home" title="Home"><i class="fas fa-home"></i></a>
-    <a href="#abstract" title="Abstract"><i class="fas fa-align-left"></i></a>
-    <a href="#methodology" title="Methodology"><i class="fas fa-cogs"></i></a>
-    <a href="#quantitative-results" title="Results"><i class="fas fa-images"></i></a>
-    <a href="#citation" title="Citation"><i class="fas fa-quote-right"></i></a>
-</div>
-
-<div class="container" id="home">
-
-    <!-- Hero Section -->
-    <div class="section" style="padding-bottom: 20px;">
-        <div style="text-align: center;">
-            <h1 class="title title-black">
-                Multi-Perspective Subimage CLIP with Keyword<br>
-                Guidance for Remote Sensing Image-Text Retrieval
+    <!-- Hero -->
+    <section class="section hero" id="home">
+        <div class="container">
+            <h1 class="title">
+                Multi-Perspective Subimage CLIP with Keyword Guidance<br>
+                for Remote Sensing Image-Text Retrieval
             </h1>
             
-            <!-- 作者部分（示例，替换为你的作者与单位） -->
-            <div class="author-block">
-                <span class="author-name"><a href="#" target="_blank">Author 1</a><sup>1,*</sup></span>
-                <span class="author-name"><a href="#" target="_blank">Author 2</a><sup>1,*</sup></span>
-                <span class="author-name"><a href="#" target="_blank">Author 3</a><sup>2</sup></span>
-                <span class="author-name"><a href="#" target="_blank">Author 4</a><sup>2</sup></span>
-                <span class="author-name"><a href="#" target="_blank">Author 5</a><sup>3,†</sup></span>
-                <br>
-                <span class="author-name"><a href="#" target="_blank">Author 6</a><sup>3</sup></span>
-                <span class="author-name"><a href="#" target="_blank">Author 7</a><sup>1</sup></span>
+            <div class="authors">
+                <a href="https://github.com/Lcrucial1f?tab=repositories" target="_blank" class="author-name">Yifan Li<sup>1,*</sup></a>
+                <a href="https://scholar.google.com/citations?user=cXins1kAAAAJ&hl=en" target="_blank" class="author-name">Shiying Wang<sup>1,†</sup></a>
+                <a href="https://www.qhu-hdacp.cn/hjq.html" target="_blank" class="author-name">Jianqiang Huang<sup>1,†</sup></a>
             </div>
-        
-            <!-- 机构部分（示例） -->
+            
             <div class="affiliations">
-                <span class="affil-item"><sup>1</sup>Institution A</span>
-                <span class="affil-item"><sup>2</sup>Institution B</span>
-                <span class="affil-item"><sup>3</sup>Institution C</span>
+                <sup>1</sup> Qinghai University<br>
+                <span style="font-size: 0.85em; opacity: 0.8;"><sup>*</sup> First author. <sup>†</sup> Corresponding authors.</span>
             </div>
 
-            <!-- Links（示例链接，替换为你的链接） -->
-            <div class="link-buttons" style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
-                <a href="https://arxiv.org/pdf/xxxx.xxxxx" target="_blank" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
-                <a href="https://github.com/yourname/MPS-CLIP" target="_blank" class="btn"><i class="fab fa-github"></i> Code</a>
-                <a href="https://huggingface.co/datasets/yourname/mps-clip-datasets" target="_blank" class="btn"><i class="fas fa-database"></i> Data</a>
-                <a href="https://huggingface.co/yourname/mps-clip-models" target="_blank" class="btn"><i class="fas fa-layer-group"></i> Checkpoints</a>
+            <div class="btn-group">
+                <a href="paper.pdf" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
+                <a href="https://anonymous.4open.science/r/ICME-4410-MPS-CLIP" class="btn"><i class="fab fa-github"></i> Code</a>
+                <a href="https://huggingface.co/datasets/lcrucial1f/MPS-CLIP_Data/tree/main" target="_blank" class="btn">
+                    <i class="fas fa-database"></i> Datasets
+                </a>
             </div>
         </div>
-    </div>
-
-    <!-- 原来的 Overall Results 部分去掉，实验结果统一放在下面的 Experimental Results 中 -->
+    </section>
 
     <!-- Abstract -->
-    <div class="section" id="abstract">
-        <h2 style="text-align: center; margin-bottom: 20px;">Abstract</h2>
-        <p class="text-content">
-            In this work, we propose <b>Multi-Perspective Subimage CLIP with Keyword Guidance</b>, 
-            a framework tailored for remote sensing image-text retrieval. 
-            By leveraging multiple subimages from different perspectives and incorporating keyword-based textual guidance, 
-            our method enhances the alignment between visual and textual representations in complex remote sensing scenes. 
-            The proposed model exploits both fine-grained local structures and global contextual information 
-            and is further equipped with an adapter module that efficiently bridges pre-trained CLIP features 
-            with task-specific retrieval objectives. Extensive experiments on multiple benchmark datasets 
-            demonstrate the effectiveness of our approach in improving retrieval accuracy and robustness.
-        </p>
-    </div>
+    <section class="section" id="abstract">
+        <div class="container">
+            <div class="abstract-box">
+                <h2 style="text-align:center; margin-bottom:20px;">Abstract</h2>
+                <p class="abstract-text">
+                    Vision-Language Pre-training (VLP) models like CLIP have significantly advanced Remote Sensing Image-Text Retrieval (RSITR). 
+                    However, existing methods predominantly rely on coarse-grained global alignment, which often overlooks the dense, multi-scale 
+                    semantics inherent in overhead imagery. Moreover, adapting these heavy models via full fine-tuning incurs prohibitive 
+                    computational costs and risks catastrophic forgetting.
+                </p>
+                <p class="abstract-text">
+                    To address these challenges, we propose <strong>MPS-CLIP</strong>, a parameter-efficient framework designed to shift the retrieval paradigm 
+                    from global matching to keyword-guided fine-grained alignment. Specifically, we leverage a Large Language Model (LLM) to extract 
+                    core semantic keywords, guiding the Segment Anything Model (SamGeo) to generate semantically relevant sub-perspectives. 
+                    To efficiently adapt the frozen backbone, we introduce a Gated Global Attention (G<sup>2</sup>A) adapter, which captures global context 
+                    and long-range dependencies with minimal overhead. Furthermore, a Multi-Perspective Representation (MPR) module aggregates these 
+                    local cues into robust multi-perspective embeddings.
+                </p>
+                <p class="abstract-text">
+                    The framework is optimized via a hybrid objective combining multi-perspective contrastive and weighted triplet losses, which 
+                    dynamically selects maximum-response perspectives to suppress noise and enforce precise semantic matching. Extensive experiments 
+                    on the RSICD and RSITMD benchmarks demonstrate that MPS-CLIP achieves state-of-the-art performance with <strong>35.18%</strong> and 
+                    <strong>48.40%</strong> mean Recall (mR), respectively, significantly outperforming full fine-tuning baselines and recent competitive methods.
+                </p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Methodology / Framework -->
-    <div class="section" id="methodology">
-        <h2 style="text-align: center; margin-bottom: 30px;">Methodology</h2>
+    <!-- Methodology -->
+    <section class="section" id="methodology">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Methodology</h2>
+            
+            <!-- Figure 1 -->
+            <figure>
+                <div class="img-wrapper">
+                    <img src="pipeline.png" alt="Pipeline">
+                </div>
+                <figcaption><strong>Figure 1.</strong> Overall pipeline of MPS-CLIP. Keywords from LLMs guide SamGeo to generate sub-images, processed by a shared CLIP backbone with G<sup>2</sup>A adapters.</figcaption>
+            </figure>
 
-        <!-- 框架图 1：pipeline.png -->
-        <div class="img-container zoom-trigger narrow">
-            <img src="pipeline.png" alt="Pipeline Overview" style="border-radius: 8px;">
-            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Overall pipeline of the proposed Multi-Perspective Subimage CLIP with keyword guidance for remote sensing image-text retrieval.
+            <!-- Figure 2 -->
+            <figure style="margin-top: 60px;">
+                <div class="img-wrapper" style="max-width: 850px;">
+                    <img src="adapter.png" alt="Adapter Structure">
+                </div>
+                <figcaption><strong>Figure 2.</strong> Structure of the Gated Global Attention (G<sup>2</sup>A) adapter.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- Experimental Results -->
+    <section class="section" id="experiments-main">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Experimental Results</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">
+                Performance comparison with state-of-the-art methods on RSICD and RSITMD benchmarks.
             </p>
-        </div>
 
-        <!-- 框架图 2：adapter.png -->
-        <div class="img-container zoom-trigger narrow" style="margin-top: 30px;">
-            <img src="adapter.png" alt="Adapter Module Overview" style="border-radius: 8px;">
-            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Illustration of the adapter module that integrates multi-perspective subimages and textual keywords into CLIP for efficient retrieval.
+            <!-- Dataset Tabs -->
+            <div class="tab-buttons" id="exp-buttons">
+                <button class="tab-btn active" onclick="openDataset(event, 'rsicd')">RSICD Dataset</button>
+                <button class="tab-btn" onclick="openDataset(event, 'rsitmd')">RSITMD Dataset</button>
+            </div>
+
+            <!-- Tab Content 1: RSICD -->
+            <div id="rsicd" class="tab-content active exp-content">
+                <div class="table-responsive">
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" style="text-align:left;">Methods</th>
+                                <th colspan="3">Text Retrieval</th>
+                                <th colspan="3">Image Retrieval</th>
+                                <th rowspan="2">mR</th>
+                            </tr>
+                            <tr>
+                                <th>R@1</th><th>R@5</th><th>R@10</th>
+                                <th>R@1</th><th>R@5</th><th>R@10</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Centered Section Header -->
+                            <tr><td colspan="8" class="table-section-header">Train from Scratch</td></tr>
+                            
+                            <tr><td style="text-align:left;">KAMCL</td><td>11.99</td><td>27.17</td><td>38.33</td><td>7.78</td><td>25.23</td><td>40.02</td><td>25.08</td></tr>
+                            <tr><td style="text-align:left;">VGSGN</td><td>8.33</td><td>21.87</td><td>32.57</td><td>6.53</td><td>23.13</td><td>36.85</td><td>21.55</td></tr>
+                            <tr><td style="text-align:left;">DOVE</td><td>8.66</td><td>22.35</td><td>34.95</td><td>6.04</td><td>23.95</td><td>40.35</td><td>22.72</td></tr>
+                            <tr><td style="text-align:left;">PIR-ITR</td><td>10.89</td><td>26.17</td><td>37.79</td><td>7.17</td><td>25.07</td><td>41.06</td><td>24.69</td></tr>
+
+                            <!-- Centered Section Header -->
+                            <tr><td colspan="8" class="table-section-header">CLIP-based</td></tr>
+                            
+                            <tr><td style="text-align:left;">SkyCLIP</td><td>6.59</td><td>16.10</td><td>26.53</td><td>7.14</td><td>22.34</td><td>34.29</td><td>18.83</td></tr>
+                            <tr><td style="text-align:left;">CLIP-Adapter</td><td>7.11</td><td>19.48</td><td>31.01</td><td>7.67</td><td>24.87</td><td>39.73</td><td>21.65</td></tr>
+                            <tr><td style="text-align:left;">Linear-probe CLIP</td><td>8.46</td><td>24.41</td><td>37.72</td><td>7.81</td><td>25.89</td><td>42.47</td><td>24.46</td></tr>
+                            <tr><td style="text-align:left;">UniAdapter</td><td>12.65</td><td>30.81</td><td>42.74</td><td>9.61</td><td>30.06</td><td>47.16</td><td>28.84</td></tr>
+                            <tr><td style="text-align:left;">PE-RSITR</td><td>14.13</td><td>31.51</td><td>44.78</td><td>11.63</td><td>33.92</td><td>50.73</td><td>31.12</td></tr>
+                            <tr><td style="text-align:left;">Full-FT CLIP</td><td>13.54</td><td>30.83</td><td>43.46</td><td>11.55</td><td>33.14</td><td>49.83</td><td>30.39</td></tr>
+                            <tr><td style="text-align:left;">HarMA</td><td><span class="second">16.36</span></td><td><span class="second">34.48</span></td><td><span class="second">47.74</span></td><td><span class="second">12.92</span></td><td><span class="best">37.17</span></td><td><span class="second">53.07</span></td><td><span class="second">33.62</span></td></tr>
+                            
+                            <tr class="row-highlight">
+                                <td style="text-align:left;">MPS-CLIP (Ours)</td>
+                                <td><span class="best">18.30</span></td>
+                                <td><span class="best">37.42</span></td>
+                                <td><span class="best">50.32</span></td>
+                                <td><span class="best">13.28</span></td>
+                                <td><span class="second">37.04</span></td>
+                                <td><span class="best">54.73</span></td>
+                                <td><span class="best">35.18</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab Content 2: RSITMD -->
+            <div id="rsitmd" class="tab-content exp-content">
+                <div class="table-responsive">
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" style="text-align:left;">Methods</th>
+                                <th colspan="3">Text Retrieval</th>
+                                <th colspan="3">Image Retrieval</th>
+                                <th rowspan="2">mR</th>
+                            </tr>
+                            <tr>
+                                <th>R@1</th><th>R@5</th><th>R@10</th>
+                                <th>R@1</th><th>R@5</th><th>R@10</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Centered Section Header -->
+                            <tr><td colspan="8" class="table-section-header">Train from Scratch</td></tr>
+                            
+                            <tr><td style="text-align:left;">KAMCL</td><td>16.81</td><td>34.96</td><td>47.12</td><td>14.60</td><td>41.86</td><td>59.86</td><td>35.87</td></tr>
+                            <tr><td style="text-align:left;">VGSGN</td><td>14.16</td><td>34.96</td><td>50.66</td><td>13.23</td><td>42.57</td><td>63.41</td><td>36.50</td></tr>
+                            <tr><td style="text-align:left;">DOVE</td><td>16.81</td><td>36.80</td><td>50.93</td><td>12.20</td><td>49.93</td><td>66.50</td><td>37.73</td></tr>
+                            <tr><td style="text-align:left;">PIR-ITR</td><td>18.36</td><td>42.04</td><td>55.53</td><td>13.36</td><td>44.47</td><td>61.73</td><td>39.25</td></tr>
+
+                            <!-- Centered Section Header -->
+                            <tr><td colspan="8" class="table-section-header">CLIP-based</td></tr>
+                            
+                            <tr><td style="text-align:left;">SkyCLIP</td><td>10.18</td><td>25.44</td><td>35.62</td><td>10.88</td><td>33.27</td><td>49.82</td><td>27.54</td></tr>
+                            <tr><td style="text-align:left;">CLIP-Adapter</td><td>12.83</td><td>28.84</td><td>39.05</td><td>13.30</td><td>40.20</td><td>60.06</td><td>32.38</td></tr>
+                            <tr><td style="text-align:left;">Linear-probe CLIP</td><td>17.02</td><td>33.12</td><td>48.35</td><td>13.33</td><td>41.80</td><td>63.89</td><td>36.25</td></tr>
+                            <tr><td style="text-align:left;">UniAdapter</td><td>19.86</td><td>36.32</td><td>51.28</td><td>17.54</td><td>44.89</td><td>56.46</td><td>39.23</td></tr>
+                            <tr><td style="text-align:left;">PE-RSITR</td><td>23.67</td><td>44.07</td><td>60.36</td><td>20.10</td><td>50.63</td><td>67.97</td><td>44.47</td></tr>
+                            <tr><td style="text-align:left;">Full-FT CLIP</td><td>24.16</td><td>47.12</td><td><span class="best">61.28</span></td><td><span class="second">20.40</span></td><td>50.53</td><td>68.54</td><td>45.33</td></tr>
+                            <tr><td style="text-align:left;">HarMA</td><td><span class="second">25.81</span></td><td><span class="second">48.37</span></td><td>60.61</td><td>19.92</td><td><span class="second">53.27</span></td><td><span class="best">71.21</span></td><td><span class="second">46.53</span></td></tr>
+                            
+                            <tr class="row-highlight">
+                                <td style="text-align:left;">MPS-CLIP (Ours)</td>
+                                <td><span class="best">27.88</span></td>
+                                <td><span class="best">51.11</span></td>
+                                <td><span class="second">61.06</span></td>
+                                <td><span class="best">22.61</span></td>
+                                <td><span class="best">56.59</span></td>
+                                <td><span class="second">71.15</span></td>
+                                <td><span class="best">48.40</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Qualitative Results (Updated with new images) -->
+    <section class="section" id="visuals" style="background-color: #fcfcfc;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Qualitative Results</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">
+                Visual comparisons on remote sensing image-text retrieval.
             </p>
-        </div>
 
-        <!-- 可视化：Image / Text 特征 -->
-        <div class="text-content" style="margin-top: 40px;">
-            <h3 class="figure-header" style="text-align: center;">Visualization of Image and Text Features</h3>
+            <div class="carousel-container">
+                <!-- Slide 1: Figure 3 (Existing) -->
+                <div class="carousel-slide active">
+                    <div class="img-wrapper" style="border:none; box-shadow:none;">
+                        <img src="img-text.png" alt="Visualization of features"> 
+                    </div>
+                    <div class="carousel-caption">
+                        <strong>Figure 3.</strong> Visualization of image-text features and keyword-guided sub-regions.
+                    </div>
+                </div>
+
+                <!-- Slide 2: 对比图2.png (New) -->
+                <div class="carousel-slide">
+                    <div class="img-wrapper" style="border:none; box-shadow:none;">
+                        <img src="对比图2.png" alt="Visual Comparison 1">
+                    </div>
+                    <div class="carousel-caption">
+                        <strong>Figure 4.</strong> Visual comparison of retrieval results (Example 1).
+                    </div>
+                </div>
+
+                <!-- Slide 3: 对比图3.png (New) -->
+                <div class="carousel-slide">
+                    <div class="img-wrapper" style="border:none; box-shadow:none;">
+                        <img src="对比图3.png" alt="Visual Comparison 2">
+                    </div>
+                    <div class="carousel-caption">
+                        <strong>Figure 5.</strong> Visual comparison of retrieval results (Example 2).
+                    </div>
+                </div>
+
+                <!-- Slide 4: 对比图4.png (New) -->
+                <div class="carousel-slide">
+                    <div class="img-wrapper" style="border:none; box-shadow:none;">
+                        <img src="对比图4.png" alt="Visual Comparison 3">
+                    </div>
+                    <div class="carousel-caption">
+                        <strong>Figure 6.</strong> Visual comparison of retrieval results (Example 3).
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <button class="carousel-btn prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
         </div>
-        
-        <!-- text.png 可视化 -->
-        <div class="img-container zoom-trigger narrow" style="margin: 20px auto;">
-            <img src="text.png" alt="Text Feature Visualization" style="border-radius: 8px;">
-            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Visualization of text features and keyword guidance for remote sensing image-text retrieval.
+    </section>
+
+    <!-- Ablation Studies -->
+    <section class="section" id="ablation">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Ablation Studies</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">
+                Detailed analysis of component effectiveness. Click tabs to view details.
             </p>
+            
+            <!-- Ablation Tabs -->
+            <div class="tab-buttons" id="ablation-buttons">
+                <button class="tab-btn active" onclick="openAblation(event, 'abl-cls')">[CLS] Token</button>
+                <button class="tab-btn" onclick="openAblation(event, 'abl-adapter')">Adapter</button>
+                <button class="tab-btn" onclick="openAblation(event, 'abl-mpr')">MPR Module</button>
+                <button class="tab-btn" onclick="openAblation(event, 'abl-loss')">Loss Functions</button>
+            </div>
+
+            <!-- Content: CLS -->
+            <div id="abl-cls" class="tab-content active ablation-content">
+                <div class="ablation-content-wrapper">
+                    <p class="ablation-desc">Effectiveness of the [CLS] token compared to Mean Pooling.</p>
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Text R@1</th><th>Img R@1</th>
+                                <th>mR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Mean Pool</td><td>14.27</td><td>10.52</td><td>31.37</td></tr>
+                            <tr class="row-highlight"><td>[CLS] Token</td><td>18.30</td><td>13.28</td><td>35.18</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content: Adapter -->
+            <div id="abl-adapter" class="tab-content ablation-content">
+                <div class="ablation-content-wrapper">
+                    <p class="ablation-desc">Impact of Attention (Attn) and Gating mechanisms within the G<sup>2</sup>A adapter.</p>
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th>Attn</th><th>Gate</th>
+                                <th>mR</th>
+                                <th>Params (M)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>&times;</td><td>&times;</td><td>34.34</td><td>0.49</td></tr>
+                            <tr><td>&checkmark;</td><td>&times;</td><td>34.59</td><td>0.51</td></tr>
+                            <tr><td>&times;</td><td>&checkmark;</td><td>34.99</td><td>0.49</td></tr>
+                            <tr class="row-highlight"><td>&checkmark;</td><td>&checkmark;</td><td>35.18</td><td>0.51</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content: MPR -->
+            <div id="abl-mpr" class="tab-content ablation-content">
+                <div class="ablation-content-wrapper">
+                    <p class="ablation-desc">Effect of aggregating keyword-guided sub-perspectives via the MPR module.</p>
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th>MPR Module</th>
+                                <th>Text R@1</th><th>Img R@1</th>
+                                <th>mR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>w/o MPR</td><td>17.38</td><td>13.36</td><td>34.50</td></tr>
+                            <tr class="row-highlight"><td>w/ MPR</td><td>18.30</td><td>13.28</td><td>35.18</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content: Loss -->
+            <div id="abl-loss" class="tab-content ablation-content">
+                <div class="ablation-content-wrapper">
+                    <p class="ablation-desc">Contribution of Multi-Perspective Contrastive (MPC) and Weighted Triplet (MPT) losses.</p>
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th>L<sub>Base</sub></th><th>L<sub>MPC</sub></th><th>L<sub>MPT</sub></th>
+                                <th>mR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>&checkmark;</td><td></td><td></td><td>34.50</td></tr>
+                            <tr><td>&checkmark;</td><td>&checkmark;</td><td></td><td>34.65</td></tr>
+                            <tr><td>&checkmark;</td><td></td><td>&checkmark;</td><td>34.74</td></tr>
+                            <tr class="row-highlight"><td>&checkmark;</td><td>&checkmark;</td><td>&checkmark;</td><td>35.18</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
+    </section>
 
-        <!-- image.png 可视化 -->
-        <div class="img-container zoom-trigger narrow" style="margin: 20px auto;">
-            <img src="image.png" alt="Image Feature Visualization" style="border-radius: 8px;">
-            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Visualization of image features obtained from multi-perspective subimages in remote sensing scenes.
-            </p>
-        </div>
-    </div>
-
-    <!-- Experimental Results：只放 results.png -->
-    <div class="section" id="quantitative-results">
-        <h2 style="text-align: center; margin-bottom: 20px;">Experimental Results</h2>
-        <p style="text-align: center; margin-bottom: 20px; color: #666;">
-            Quantitative and qualitative comparisons with state-of-the-art methods on remote sensing image-text retrieval benchmarks.
-        </p>
-
-        <div class="img-container zoom-trigger narrow">
-            <img src="results.png" alt="Experimental Results" style="border-radius: 8px;">
-            <p style="text-align: center; font-size: 0.9rem; color: #5f6368; margin-top: 10px;">
-                Experimental results of the proposed method compared with existing approaches on multiple datasets.
-            </p>
-        </div>
-    </div>
-
-    <!-- 下面的 Qualitative Results / 表格等都去掉，只保留上面 results.png 即为实验结果 -->
-
-    <!-- BibTeX -->
-    <div class="section" id="citation">
-        <h2 style="text-align: center; margin-bottom: 20px;">Citation</h2>
-        <div style="position: relative; max-width: 800px; margin: 0 auto;">
-            <bibtex>
+    <!-- Citation -->
+    <section class="section" id="citation">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Citation</h2>
+            <div class="bibtex-container">
+                <button class="copy-btn" onclick="copyBibtex()">Copy</button>
+<pre id="bibtex-text">
 @article{MP_Subimage_CLIP_2025,
   title   = {Multi-Perspective Subimage CLIP with Keyword Guidance for Remote Sensing Image-Text Retrieval},
-  author  = {Author, First and Author, Second and Author, Third and Author, Fourth},
-  journal = {XXXX},
+  author  = {Li, Yifan and Wang, Shiying and Huang, Jianqiang},
+  journal = {International Conference on Multimedia and Expo (ICME)},
   year    = {2025}
 }
-            </bibtex>
-            <button class="copy-btn">Copy</button>
+</pre>
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-col">
-                <div class="footer-title">Acknowledgment</div>
-                <p style="font-size: 0.9rem; margin-bottom: 0;">
-                    This work was supported by XXXX grants and projects.
-                </p>
-            </div>
-            <div class="footer-col" style="text-align: right;">
-                <div class="footer-title">About</div>
-                <p style="font-size: 0.9rem; margin-bottom: 10px;">
-                    © 2025 MP-Subimage-CLIP Project.
-                </p>
-                <p style="font-size: 0.85rem; color: #9aa0a6;">
-                    Website template adapted from <a href="https://github.com/nerfies/nerfies.github.io" class="footer-link">Nerfies</a>.
-                </p>
-            </div>
+    <footer>
+        <div class="container" style="text-align:center; padding: 40px 0; color: #888; font-size: 0.9rem;">
+            <p>Copyright © 2025 MPS-CLIP Project. All rights reserved.</p>
         </div>
     </footer>
-</div>
 
-<!-- External JavaScript -->
-<script src="static/js/script.js"></script>
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" src="" alt="Zoom">
+    </div>
 
-<!-- 内部 JS：数据集 Tab 切换（目前已经不用表格 Tab，如果未来要加表格可沿用） -->
-<script>
-    function openDataset(evt, datasetId) {
-        var contents = document.getElementsByClassName("dataset-content");
-        for (var i = 0; i < contents.length; i++) {
-            contents[i].classList.remove("active");
-            contents[i].style.display = "none";
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // BibTeX Copy
+        function copyBibtex() {
+            const text = document.getElementById('bibtex-text').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerText = 'Copied!';
+                setTimeout(() => btn.innerText = 'Copy', 2000);
+            });
         }
 
-        var buttons = document.querySelectorAll(".main-tabs .tab-btn");
-        buttons.forEach(function(btn) { btn.classList.remove("active"); });
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        
+        document.querySelectorAll('.img-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                lightboxImg.src = wrapper.querySelector('img').src;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
 
-        document.getElementById(datasetId).style.display = "block";
-        setTimeout(function() {
-            document.getElementById(datasetId).classList.add("active");
-        }, 10);
-        evt.currentTarget.classList.add("active");
-    }
-</script>
+        lightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
 
+        /* --- Tabs Logic (Experiments) --- */
+        function openDataset(evt, datasetName) {
+            handleTabSwitch(evt, datasetName, 'exp-buttons', 'exp-content');
+        }
+
+        /* --- Tabs Logic (Ablation) --- */
+        function openAblation(evt, tabId) {
+            handleTabSwitch(evt, tabId, 'ablation-buttons', 'ablation-content');
+        }
+
+        // Generic Tab Handler
+        function handleTabSwitch(evt, contentId, buttonContainerId, contentClass) {
+            // Hide contents
+            var contents = document.getElementsByClassName(contentClass);
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].style.display = "none";
+                contents[i].classList.remove("active");
+            }
+            // Deactivate buttons
+            var buttons = document.getElementById(buttonContainerId).getElementsByClassName("tab-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].className = buttons[i].className.replace(" active", "");
+            }
+            // Activate target
+            var target = document.getElementById(contentId);
+            target.style.display = "block";
+            setTimeout(() => target.classList.add("active"), 10);
+            evt.currentTarget.className += " active";
+        }
+
+        /* --- Carousel Logic (Visual Results) --- */
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("carousel-slide");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                slides[i].classList.remove("active");
+            }
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(() => slides[slideIndex-1].classList.add("active"), 10);
+        }
+    </script>
 </body>
 </html>
