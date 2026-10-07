@@ -118,8 +118,22 @@ h1:before, .anchor:before {
   .paper-box .paper-box-image { margin-top: 1rem; }
 }
 
-/* Keep unfilled template sections visible until details are confirmed. */
-.section-reserved { min-height: 4rem; }
+/* Compact text mark for the Xiaohongshu profile link. */
+.xiaohongshu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: .25em;
+  background: #ff2442;
+  color: #fff;
+  font-size: .8em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: .05em;
+  margin: 0 .15em;
+}
 
 /* Compact Shields.io badges, following cslikai.cn's publication resources. */
 .author-contribution { font-size: .88em; color: #626b73; }

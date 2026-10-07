@@ -4,12 +4,14 @@ baseurl: ""
 description: "Undergraduate in Computer Science and Technology"
 repository: "Lcrucial1f/Lcrucial1f.github.io"
 author:
-  name: "Yifan Li"
+  name: "Yifan Li (李一帆)"
   avatar: "/images/profile.jpg"
   bio: "Qinghai University"
   location: "Xining, China"
   email: "lcrucial1f@gmail.com"
   github: "Lcrucial1f"
+  googlescholar: "https://scholar.google.com/citations?user=5YwzKzEAAAAJ&hl=zh-CN"
+  xiaohongshu: "https://xhslink.cn/o/4FaGSt3keJY"
 include:
   - _pages
 exclude:

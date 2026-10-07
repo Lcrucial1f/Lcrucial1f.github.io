@@ -83,16 +83,4 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 
 - *2023.09 - now*, Undergraduate, Department of Computer Technology and Application, Qinghai University, Xining.
 
-# 💬 Invited Talks
-{: #invited-talks}
-
-<!-- Add confirmed invited talks here: date, title, host, and optional video link. -->
-<div class="section-reserved" aria-hidden="true"></div>
-
-# 💻 Internships
-{: #internships}
-
-<!-- Add confirmed internships here: dates, role, organization, and location. -->
-<div class="section-reserved" aria-hidden="true"></div>
-
 <div class="template-credit">Built with <a href="https://github.com/RayeRen/acad-homepage.github.io">AcadHomepage</a>.</div>

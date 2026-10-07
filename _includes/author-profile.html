@@ -106,6 +106,9 @@
       {% if author.googlescholar %}
         <li><a href="{{ author.googlescholar }}"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
       {% endif %}
+      {% if author.xiaohongshu %}
+        <li><a href="{{ author.xiaohongshu }}"><span class="xiaohongshu-icon" aria-hidden="true">书</span> Xiaohongshu</a></li>
+      {% endif %}
       {% if author.pubmed %}
         <li><a href="{{ author.pubmed }}"><i class="ai ai-pubmed-square ai-fw"></i> PubMed</a></li>
       {% endif %}
@@ -199,7 +202,10 @@
         <a href="https://vine.co/u/{{ author.vine }}"><i class="fab fa-fw fa-vine" aria-hidden="true"></i></a>
       {% endif %}
       {% if author.googlescholar %}
-        <a href="{{ author.googlescholar }}"><i class="fas fa-fw fa-graduation-cap"></i></a>
+        <a href="{{ author.googlescholar }}" aria-label="Google Scholar"><i class="fas fa-fw fa-graduation-cap" aria-hidden="true"></i></a>
+      {% endif %}
+      {% if author.xiaohongshu %}
+        <a href="{{ author.xiaohongshu }}" aria-label="Xiaohongshu"><span class="xiaohongshu-icon" aria-hidden="true">书</span></a>
       {% endif %}
       {% if author.pubmed %}
         <a href="{{ author.pubmed }}"><i class="ai ai-pubmed-square ai-fw"></i></a>
