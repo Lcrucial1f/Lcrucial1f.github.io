@@ -118,21 +118,15 @@ h1:before, .anchor:before {
   .paper-box .paper-box-image { margin-top: 1rem; }
 }
 
-/* Compact text mark for the Xiaohongshu profile link. */
+/* Official app icon served by Xiaohongshu's website. */
 .xiaohongshu-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.25em;
-  height: 1.25em;
-  border-radius: .25em;
-  background: #ff2442;
-  color: #fff;
-  font-size: .8em;
-  font-weight: 700;
-  line-height: 1;
-  vertical-align: .05em;
-  margin: 0 .15em;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin: 0 2px 0 0;
 }
 
 /* Compact Shields.io badges, following cslikai.cn's publication resources. */
