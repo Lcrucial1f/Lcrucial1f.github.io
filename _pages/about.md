@@ -81,9 +81,7 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 # 📖 Educations
 {: #education}
 
-**Qinghai University**, Xining, China  
-Undergraduate, Computer Science and Technology  
-August 2023 – Present
+- *2023.09 - now*, Undergraduate, Department of Computer Technology and Application, Qinghai University, Xining.
 
 # 💬 Invited Talks
 {: #invited-talks}
