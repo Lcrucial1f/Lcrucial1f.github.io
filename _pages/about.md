@@ -14,7 +14,14 @@ I am an undergraduate student in **Computer Science and Technology** at **Qingha
 
 You can reach me at [lcrucial1f@gmail.com](mailto:lcrucial1f@gmail.com).
 
-# Publications
+# 🔥 News
+{: #news}
+
+- **2026.10:** My academic homepage is now online.
+- **2026:** MPS-CLIP has been accepted to **ICME 2026**.
+
+# 📝 Publications
+{: #publications}
 
 <div class="paper-box">
   <div class="paper-box-image">
@@ -38,16 +45,30 @@ A parameter-efficient framework for remote sensing image-text retrieval with key
   </div>
 </div>
 
-# Honors and Awards
+# 🎖 Honors and Awards
+{: #honors-and-awards}
 
 - **Second Prize**, 10th Huawei ICT Competition, China Final — April 2026
 - **First Prize**, ASC Student Supercomputer Challenge — March 2026
 - **Second Prize**, ASC Student Supercomputer Challenge — February 2025
 
-# Education
+# 📖 Educations
+{: #education}
 
 **Qinghai University**, Xining, China  
 Undergraduate, Computer Science and Technology  
 August 2023 – Present
+
+# 💬 Invited Talks
+{: #invited-talks}
+
+<!-- Add confirmed invited talks here: date, title, host, and optional video link. -->
+<div class="section-reserved" aria-hidden="true"></div>
+
+# 💻 Internships
+{: #internships}
+
+<!-- Add confirmed internships here: dates, role, organization, and location. -->
+<div class="section-reserved" aria-hidden="true"></div>
 
 <div class="template-credit">Built with <a href="https://github.com/RayeRen/acad-homepage.github.io">AcadHomepage</a>.</div>

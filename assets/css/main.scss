@@ -117,3 +117,6 @@ h1:before, .anchor:before {
   .author__content { min-width: 0; }
   .paper-box .paper-box-image { margin-top: 1rem; }
 }
+
+/* Keep unfilled template sections visible until details are confirmed. */
+.section-reserved { min-height: 4rem; }

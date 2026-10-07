@@ -7,7 +7,7 @@ An English academic homepage based on [AcadHomepage](https://github.com/RayeRen/
 
 ## Editing
 
-- `_pages/about.md`: introduction, publications, honors and awards, education.
+- `_pages/about.md`: introduction, news, publications, honors and awards, education, invited talks, internships. Empty sections remain visible until confirmed details are added.
 - `_config.yml`: name, affiliation, email, GitHub and site settings.
 - `_data/navigation.yml`: navigation links.
 - `images/profile.jpg`: profile image.
