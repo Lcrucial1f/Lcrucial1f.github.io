@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "Yifan Li"
-excerpt: "Yifan Li, undergraduate at Qinghai University. Research in multimodal retrieval and music source separation."
+excerpt: "Yifan Li, senior undergraduate at Qinghai University and incoming Ph.D. student at Beijing Institute of Technology, jointly trained with Qiyuan Lab."
 author_profile: true
 redirect_from:
   - /about/
@@ -10,9 +10,17 @@ redirect_from:
 
 <span class="anchor" id="about-me"></span>
 
-I am an undergraduate student in **Computer Science and Technology** at **Qinghai University**. My research interests include **multimodal retrieval** and **music source separation**.
+# 👋 Welcome to my website!
 
-You can reach me at [lcrucial1f@gmail.com](mailto:lcrucial1f@gmail.com).
+My name is **Yifan Li (李一帆)**. I am currently a senior undergraduate student at **Qinghai University**.
+
+I will soon join the **School of Computer Science and Technology, Beijing Institute of Technology (BIT)** as a Ph.D. student, jointly trained with **Qiyuan Lab**. I will be supervised by Prof. [Ying Fu (付莹)](https://ying-fu.github.io/) and Prof. Junliang Xing (兴军亮).
+
+🔬 My previous research mainly focused on **audio separation** and **multimodal retrieval**. Currently, I am exploring interesting research problems and new directions, and I will keep updating this website with my latest research and progress.
+
+🤗 I will open-source my research projects and code whenever possible.
+
+📮 Feel free to contact me for research discussions and collaborations.
 
 # 🔥 News
 {: #news}
