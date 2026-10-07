@@ -47,13 +47,20 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 
 [Multi-Perspective Subimage CLIP with Keyword Guidance for Remote Sensing Image-Text Retrieval](https://arxiv.org/abs/2601.18190)
 
-**Yifan Li**, Shiying Wang, Jianqiang Huang
+**Yifan Li**<sup>&#42;</sup>, **Shiying Wang**<sup>&#42;</sup>, Jianqiang Huang
+
+<span class="author-contribution"><sup>*</sup> Equal contribution (co-first authors).</span>
 
 *ICME 2026*
 
-[Project](/MPS-CLIP/) / [Paper](https://arxiv.org/abs/2601.18190) / [Code](https://github.com/Lcrucial1f/MPS-CLIP)
+<div class="publication-links" aria-label="MPS-CLIP resources">
+  <a class="publication-link" href="https://arxiv.org/abs/2601.18190" aria-label="Read MPS-CLIP on arXiv, 2601.18190"><span class="publication-link-label">arXiv</span><span class="publication-link-value publication-link-arxiv">2601.18190</span></a>
+  <a class="publication-link" href="/MPS-CLIP/" aria-label="Visit the MPS-CLIP project page"><span class="publication-link-label">Project Page</span><span class="publication-link-value publication-link-project">MPS-CLIP</span></a>
+  <a class="publication-link" href="https://huggingface.co/datasets/lcrucial1f/MPS-CLIP_Data/tree/main" aria-label="Download MPS-CLIP datasets on Hugging Face"><span class="publication-link-label">🤗 HuggingFace</span><span class="publication-link-value publication-link-data">Datasets</span></a>
+  <a class="publication-link" href="https://github.com/Lcrucial1f/MPS-CLIP" aria-label="View MPS-CLIP code on GitHub"><span class="publication-link-label">GitHub</span><span class="publication-link-value publication-link-code">Code</span></a>
+</div>
 
-A parameter-efficient framework for remote sensing image-text retrieval with keyword-guided multi-perspective alignment.
+MPS-CLIP is a **parameter-efficient framework for remote sensing image-text retrieval** that moves beyond global image-text matching to **keyword-guided fine-grained alignment**. It uses an LLM to extract semantic keywords and guide SamGeo in generating relevant subimages. A **Gated Global Attention (G²A) adapter** captures global context while keeping the backbone frozen, and a **Multi-Perspective Representation (MPR) module** aggregates complementary local cues. Together, these components achieve **35.18% mR on RSICD and 48.40% mR on RSITMD**, outperforming the compared full fine-tuning baselines and recent methods.
 
   </div>
 </div>
