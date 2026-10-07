@@ -74,9 +74,9 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 # 🎖 Honors and Awards
 {: #honors-and-awards}
 
-- **Second Prize**, 10th Huawei ICT Competition, China Final — April 2026
-- **First Prize**, ASC Student Supercomputer Challenge — March 2026
-- **Second Prize**, ASC Student Supercomputer Challenge — February 2025
+- *2026.04* 🥈 **Second Prize**, 10th Huawei ICT Competition, China Final
+- *2026.03* 🥇 **First Prize**, ASC Student Supercomputer Challenge
+- *2025.02* 🥈 **Second Prize**, ASC Student Supercomputer Challenge
 
 # 📖 Educations
 {: #education}
