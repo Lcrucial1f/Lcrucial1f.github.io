@@ -60,7 +60,9 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
   <a class="publication-link" href="https://github.com/Lcrucial1f/MPS-CLIP" aria-label="View MPS-CLIP code on GitHub"><span class="publication-link-label">GitHub</span><span class="publication-link-value publication-link-code">Code</span></a>
 </div>
 
-MPS-CLIP is a **parameter-efficient framework for remote sensing image-text retrieval** that moves beyond global image-text matching to **keyword-guided fine-grained alignment**. It uses an LLM to extract semantic keywords and guide SamGeo in generating relevant subimages. A **Gated Global Attention (G²A) adapter** captures global context while keeping the backbone frozen, and a **Multi-Perspective Representation (MPR) module** aggregates complementary local cues. Together, these components achieve **35.18% mR on RSICD and 48.40% mR on RSITMD**, outperforming the compared full fine-tuning baselines and recent methods.
+<ul class="publication-summary">
+  <li>MPS-CLIP improves <strong>remote sensing image-text retrieval</strong> through <strong>keyword-guided multi-perspective alignment</strong>. <strong>G²A and MPR</strong> combine global context and local cues while keeping the backbone frozen. It achieves <strong>35.18% mR on RSICD and 48.40% mR on RSITMD</strong>.</li>
+</ul>
 
   </div>
 </div>
