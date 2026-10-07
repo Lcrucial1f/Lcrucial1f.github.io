@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "Yifan Li"
-excerpt: "Yifan Li, senior undergraduate at Qinghai University and incoming Ph.D. student at Beijing Institute of Technology, jointly trained with Qiyuan Lab."
+excerpt: "Yifan Li, senior undergraduate at Qinghai University and incoming Ph.D. student at Beijing Institute of Technology."
 author_profile: true
 redirect_from:
   - /about/
@@ -14,7 +14,7 @@ redirect_from:
 
 My name is **Yifan Li (李一帆)**. I am currently a senior undergraduate student at **Qinghai University**.
 
-I will soon join the **School of Computer Science and Technology, Beijing Institute of Technology (BIT)** as a Ph.D. student, jointly trained with **Qiyuan Lab**. I will be supervised by Prof. [Ying Fu (付莹)](https://ying-fu.github.io/) and Prof. [Junliang Xing (兴军亮)](https://www.alphaxiv.org/@junliang-xing-xing-jun-liang).
+I will soon join the **School of Computer Science and Technology, Beijing Institute of Technology (BIT)** as a Ph.D. student, under the supervision of Prof. [Ying Fu (付莹)](https://ying-fu.github.io/) and Prof. [Junliang Xing (兴军亮)](https://www.alphaxiv.org/@junliang-xing-xing-jun-liang).
 
 🔬&nbsp;&nbsp;&nbsp;My previous research mainly focused on **audio separation** and **multimodal retrieval**. Currently, I am exploring interesting research problems and new directions, and I will keep updating this website with my latest research and progress.
 
