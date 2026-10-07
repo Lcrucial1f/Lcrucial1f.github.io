@@ -53,16 +53,20 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 
 *ICME 2026*
 
-<div class="publication-links" aria-label="MPS-CLIP resources">
-  <a class="publication-link" href="https://arxiv.org/abs/2601.18190" aria-label="Read MPS-CLIP on arXiv, 2601.18190"><span class="publication-link-label">arXiv</span><span class="publication-link-value publication-link-arxiv">2601.18190</span></a>
-  <a class="publication-link" href="/MPS-CLIP/" aria-label="Visit the MPS-CLIP project page"><span class="publication-link-label">Project Page</span><span class="publication-link-value publication-link-project">MPS-CLIP</span></a>
-  <a class="publication-link" href="https://huggingface.co/datasets/lcrucial1f/MPS-CLIP_Data/tree/main" aria-label="Download MPS-CLIP datasets on Hugging Face"><span class="publication-link-label">🤗 HuggingFace</span><span class="publication-link-value publication-link-data">Datasets</span></a>
-  <a class="publication-link" href="https://github.com/Lcrucial1f/MPS-CLIP" aria-label="View MPS-CLIP code on GitHub"><span class="publication-link-label">GitHub</span><span class="publication-link-value publication-link-code">Code</span></a>
-</div>
-
 <ul class="publication-summary">
   <li>MPS-CLIP improves <strong>remote sensing image-text retrieval</strong> through <strong>keyword-guided multi-perspective alignment</strong>. <strong>G²A and MPR</strong> combine global context and local cues while keeping the backbone frozen. It achieves <strong>35.18% mR on RSICD and 48.40% mR on RSITMD</strong>.</li>
 </ul>
+
+<div class="publication-links" aria-label="MPS-CLIP resources">
+  <a href="https://arxiv.org/abs/2601.18190"><img src="https://img.shields.io/badge/arXiv-2601.18190-b31b1b" alt="arXiv: 2601.18190" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="/MPS-CLIP/"><img src="https://img.shields.io/badge/Project_Page-Online-brightgreen" alt="Project Page: Online" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="https://github.com/Lcrucial1f/MPS-CLIP"><img src="https://img.shields.io/github/stars/Lcrucial1f/MPS-CLIP?style=social&amp;label=Code+Stars" alt="MPS-CLIP GitHub Code Stars" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="https://huggingface.co/datasets/lcrucial1f/MPS-CLIP_Data/tree/main"><img src="https://img.shields.io/badge/Huggingface-Datasets-orange?logo=huggingface" alt="Hugging Face: Datasets" height="20"></a>
+</div>
+
 
   </div>
 </div>
