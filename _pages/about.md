@@ -25,8 +25,13 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 # 🔥 News
 {: #news}
 
-- **2026.10:** My academic homepage is now online.
-- **2026:** MPS-CLIP has been accepted to **ICME 2026**.
+- *2026.09*: 🎉 Our paper **Falcon** was accepted by **NeurIPS 2026**!
+- *2026.04*: 🥈 We won the **Second Prize** in the China National Finals of the **10th Huawei ICT Competition**!
+- *2026.03*: 🎉 My first-author paper **MPS-CLIP** was accepted by **ICME 2026**!
+- *2026.03*: 🥇 We won the **First Prize** in the **ASC 2026 Student Supercomputer Challenge**!
+- *2026.01*: 🚀 My research project on **multi-instrument music source separation** was successfully funded by Qinghai University.
+- *2025.02*: 🥈 We won the **Second Prize** in the **ASC 2025 Student Supercomputer Challenge**!
+- *2025.01*: 🚀 My research project on **LLM-assisted remote sensing image understanding** was successfully funded as a key research project at Qinghai University.
 
 # 📝 Publications
 {: #publications}
