@@ -62,9 +62,9 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
   <span class="publication-link-separator" aria-hidden="true">|</span>
   <a href="/MPS-CLIP/"><img src="https://img.shields.io/badge/Project_Page-Online-brightgreen" alt="Project Page: Online" height="20"></a>
   <span class="publication-link-separator" aria-hidden="true">|</span>
-  <a href="https://github.com/Lcrucial1f/MPS-CLIP"><img src="https://img.shields.io/github/stars/Lcrucial1f/MPS-CLIP?style=social&amp;label=Code+Stars" alt="MPS-CLIP GitHub Code Stars" height="20"></a>
-  <span class="publication-link-separator" aria-hidden="true">|</span>
   <a href="https://huggingface.co/datasets/lcrucial1f/MPS-CLIP_Data/tree/main"><img src="https://img.shields.io/badge/Huggingface-Datasets-orange?logo=huggingface" alt="Hugging Face: Datasets" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="https://github.com/Lcrucial1f/MPS-CLIP"><img src="https://img.shields.io/github/stars/Lcrucial1f/MPS-CLIP?style=social&amp;label=Code+Stars" alt="MPS-CLIP GitHub Code Stars" height="20"></a>
 </div>
 
 
