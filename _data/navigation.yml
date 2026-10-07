@@ -1,0 +1,9 @@
+main:
+  - title: "About"
+    url: "/#about-me"
+  - title: "Publications"
+    url: "/#publications"
+  - title: "Honors & Awards"
+    url: "/#honors-and-awards"
+  - title: "Education"
+    url: "/#education"

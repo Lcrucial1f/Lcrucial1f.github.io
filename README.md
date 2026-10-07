@@ -1,39 +1,44 @@
-# Lcrucial1f.github.io
+# Yifan Li — Academic Homepage
 
-个人主页与 MPS-CLIP 项目网站，通过 GitHub Pages 从 `main` 分支根目录发布。
+An English academic homepage based on [AcadHomepage](https://github.com/RayeRen/acad-homepage.github.io), published with GitHub Pages.
 
-- `/`：个人主页。内容为 `index.html`，样式为 `style.css`，交互为 `script.js`。
-- `/MPS-CLIP/`：MPS-CLIP 项目主页，编辑 `MPS-CLIP/index.html`。
-- 项目图片和 `paper.pdf` 保留在根目录，项目页使用 `../` 引用，原资源链接仍然有效。
+- Website: https://lcrucial1f.com/
+- MPS-CLIP project: https://lcrucial1f.com/MPS-CLIP/
 
-## 更新网站
+## Editing
 
-在 VS Code 打开此仓库，修改后提交并推送到 `main`。GitHub Pages 自动发布。
+- `_pages/about.md`: introduction, publications, honors and awards, education.
+- `_config.yml`: name, affiliation, email, GitHub and site settings.
+- `_data/navigation.yml`: navigation links.
+- `images/profile.jpg`: profile image.
+- `assets/css/main.scss`: homepage styling.
+- `MPS-CLIP/index.html`: existing project page. Its assets remain in the repository root.
 
-```bash
-git pull --ff-only
-# 编辑并检查网页
-git add index.html style.css script.js MPS-CLIP/index.html
-git commit -m "Update website"
-git push origin main
+Commit and push changes to `main`. GitHub Pages builds Jekyll from the repository root. Do not add `.nojekyll` or a second root `index.html`.
+
+For a local preview with a compatible Ruby environment:
+
+```sh
+bundle install
+bundle exec jekyll serve
 ```
 
-自定义域名为 https://lcrucial1f.com/ ，MPS-CLIP 项目路径为 https://lcrucial1f.com/MPS-CLIP/ 。GitHub Pages 会将 https://lcrucial1f.github.io/ 重定向至自定义域名，保留项目路径。
+## Domain configuration
 
-## 域名配置
+`CNAME` must remain `lcrucial1f.com`. HTTPS is managed by GitHub Pages.
 
-GitHub Pages 的 Custom domain 设置为 `lcrucial1f.com`，与根目录 `CNAME` 文件一致。
+DNSPod records (TTL: 600 seconds):
 
-DNSPod 记录（TTL 均为 600 秒）：
-
-| 主机记录 | 类型 | 记录值 |
+| Host | Type | Value |
 | --- | --- | --- |
 | @ | A | 185.199.108.153 |
 | @ | A | 185.199.109.153 |
 | www | CNAME | lcrucial1f.github.io. |
 
-DNSPod 免费版同一主机同一线路最多支持两条 A 记录，当前采用 GitHub Pages 的两个地址。GitHub 域名健康检查已确认此解析配置有效。
+The DNSPod free plan allows two A records on this line. This configuration passed GitHub's domain health check.
 
-需要回退到原服务器时，可将 `@` 改为单条 A 记录 `81.70.166.54`，将 `www` 改为同地址的 A 记录；先确认原服务器上的内容与 HTTPS 证书仍然可用。
+The previous server copy is retained at `/var/www/lcrucial1f/` on `81.70.166.54`. For a server rollback, first verify its content and TLS certificate, then point the apex and www records back to that server.
 
-原服务器网站目录：`/var/www/lcrucial1f/`。迁移验证完成前保留服务器上的文件。
+## Attribution
+
+AcadHomepage is distributed under the MIT license; see `LICENSE`.
