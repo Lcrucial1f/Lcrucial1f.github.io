@@ -18,6 +18,22 @@ git commit -m "Update website"
 git push origin main
 ```
 
-默认域名为 https://lcrucial1f.github.io/ 。绑定自定义域名后，GitHub Pages 会将默认域名重定向至自定义域名，保留项目路径。
+自定义域名为 https://lcrucial1f.com/ ，MPS-CLIP 项目路径为 https://lcrucial1f.com/MPS-CLIP/ 。GitHub Pages 会将 https://lcrucial1f.github.io/ 重定向至自定义域名，保留项目路径。
+
+## 域名配置
+
+GitHub Pages 的 Custom domain 设置为 `lcrucial1f.com`，与根目录 `CNAME` 文件一致。
+
+DNSPod 记录（TTL 均为 600 秒）：
+
+| 主机记录 | 类型 | 记录值 |
+| --- | --- | --- |
+| @ | A | 185.199.108.153 |
+| @ | A | 185.199.109.153 |
+| www | CNAME | lcrucial1f.github.io. |
+
+DNSPod 免费版同一主机同一线路最多支持两条 A 记录，当前采用 GitHub Pages 的两个地址。GitHub 域名健康检查已确认此解析配置有效。
+
+需要回退到原服务器时，可将 `@` 改为单条 A 记录 `81.70.166.54`，将 `www` 改为同地址的 A 记录；先确认原服务器上的内容与 HTTPS 证书仍然可用。
 
 原服务器网站目录：`/var/www/lcrucial1f/`。迁移验证完成前保留服务器上的文件。
