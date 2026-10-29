@@ -36,6 +36,43 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 # 📝 Publications
 {: #publications}
 
+
+<div class="paper-box">
+  <div class="paper-box-image">
+    <div>
+      <div class="badge">NeurIPS 2026</div>
+      <a href="https://cslikai.cn/Falcon/"><img src="/images/falcon/overall-pipeline.png" alt="Overview of Falcon for streaming audio-visual target speaker extraction" width="100%"></a>
+    </div>
+  </div>
+  <div class="paper-box-text" markdown="1">
+
+[Efficient Streaming Audio-Visual Target Speaker Extraction for Real-World Acoustic Scenes](https://arxiv.org/abs/2610.32749)
+
+Wendi Sang<sup>&#42;</sup>, Kai Li<sup>&#42;</sup>, <strong class="publication-self">Yifan Li</strong>, Jianqiang Huang, Xiaolin Hu
+
+<span class="author-contribution"><sup>*</sup> Equal contribution (co-first authors).</span>
+
+*NeurIPS 2026*
+
+<ul class="publication-summary">
+  <li>Falcon enables <strong>streaming audio-visual target speaker extraction</strong> with a <strong>single-pass multi-scale separator</strong> and speaker-contrastive training. We introduce <strong>RealSSA</strong>, combining realistic simulated scenes with real-recorded evaluation. Compared with causal AV-TFGridNet, Falcon uses <strong>91.9% fewer parameters</strong>, <strong>20.2× less computation</strong>, and <strong>11.1× lower GPU latency</strong>.</li>
+</ul>
+
+<div class="publication-links" aria-label="Falcon resources">
+  <a href="https://arxiv.org/abs/2610.32749"><img src="https://img.shields.io/badge/arXiv-2610.32749-b31b1b" alt="arXiv: 2610.32749" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="https://cslikai.cn/Falcon/"><img src="https://img.shields.io/badge/Project_Page-Online-brightgreen" alt="Project Page: Online" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="https://huggingface.co/datasets/JusperLee/RealSSA-Sim"><img src="https://img.shields.io/badge/Huggingface-RealSSA--Sim-orange?logo=huggingface" alt="Hugging Face: RealSSA-Sim" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="https://huggingface.co/datasets/JusperLee/RealSSA-Real"><img src="https://img.shields.io/badge/Huggingface-RealSSA--Real-orange?logo=huggingface" alt="Hugging Face: RealSSA-Real" height="20"></a>
+  <span class="publication-link-separator" aria-hidden="true">|</span>
+  <a href="https://github.com/JusperLee/Falcon"><img src="https://img.shields.io/github/stars/JusperLee/Falcon?style=social&amp;label=Code+Stars" alt="Falcon GitHub Code Stars" height="20"></a>
+</div>
+
+  </div>
+</div>
+
 <div class="paper-box">
   <div class="paper-box-image">
     <div>

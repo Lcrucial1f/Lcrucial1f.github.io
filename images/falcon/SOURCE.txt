@@ -1,0 +1,3 @@
+Overall pipeline figure from https://github.com/JusperLee/Falcon/blob/main/assets/Overall_Pipeline.png
+Source project: https://github.com/JusperLee/Falcon
+Distributed under the accompanying Apache-2.0 LICENSE.
