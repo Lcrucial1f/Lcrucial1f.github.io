@@ -139,4 +139,5 @@ h1:before, .anchor:before {
 
 .publication-summary { list-style-type: "·  "; padding-left: 1.1em; }
 
-.paper-box .publication-self { color: #111; font-weight: 700; }
+.paper-box .publication-self,
+.paper-box .publication-venue { color: #111; font-weight: 700; }

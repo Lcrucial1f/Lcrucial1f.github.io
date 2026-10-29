@@ -48,7 +48,7 @@ I will soon join the **School of Computer Science and Technology, Beijing Instit
 
 [Efficient Streaming Audio-Visual Target Speaker Extraction for Real-World Acoustic Scenes](https://arxiv.org/abs/2610.32749)
 
-Wendi Sang, Kai Li, <strong class="publication-self">Yifan Li</strong>, Jianqiang Huang, Xiaolin Hu. **Conference on Neural Information Processing Systems (NeurIPS) 2026.** Sydney, Australia (main conference).
+Wendi Sang, Kai Li, <strong class="publication-self">Yifan Li</strong>, Jianqiang Huang, Xiaolin Hu. <strong class="publication-venue">Conference on Neural Information Processing Systems (NeurIPS) 2026. Sydney, Australia.</strong>
 
 <ul class="publication-summary">
   <li>Falcon enables <strong>streaming audio-visual target speaker extraction</strong> with a <strong>single-pass multi-scale separator</strong> and speaker-contrastive training. We introduce <strong>RealSSA</strong>, combining realistic simulated scenes with real-recorded evaluation. Compared with causal AV-TFGridNet, Falcon uses <strong>91.9% fewer parameters</strong>, <strong>20.2× less computation</strong>, and <strong>11.1× lower GPU latency</strong>.</li>
@@ -80,7 +80,7 @@ Wendi Sang, Kai Li, <strong class="publication-self">Yifan Li</strong>, Jianqian
 
 [Multi-Perspective Subimage CLIP with Keyword Guidance for Remote Sensing Image-Text Retrieval](https://arxiv.org/abs/2601.18190)
 
-<strong class="publication-self">Yifan Li</strong>, Shiying Wang, Jianqiang Huang. **IEEE International Conference on Multimedia and Expo (ICME) 2026.** Bangkok, Thailand.
+<strong class="publication-self">Yifan Li</strong>, Shiying Wang, Jianqiang Huang. <strong class="publication-venue">IEEE International Conference on Multimedia and Expo (ICME) 2026. Bangkok, Thailand.</strong>
 
 <ul class="publication-summary">
   <li>MPS-CLIP improves <strong>remote sensing image-text retrieval</strong> through <strong>keyword-guided multi-perspective alignment</strong>. <strong>G²A and MPR</strong> combine global context and local cues while keeping the backbone frozen. It achieves <strong>35.18% mR on RSICD and 48.40% mR on RSITMD</strong>.</li>
